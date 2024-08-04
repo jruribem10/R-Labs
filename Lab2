@@ -1,0 +1,188 @@
+---
+title: "LABORATORIO_BLOQUE 0"
+author: "Jaime Uribe, Juan Pablo Duque, Soranyi Toncel, Valentina Zapata"
+date: "2024-08-01"
+output:
+  pdf_document: default
+  html_document: default
+---
+#Asigne a una variable llamada u el número 318
+```{r}
+u <- 318
+```
+
+#Imprima la variable u de modo que se muestre en el reporte
+```{r}
+print(u)
+```
+
+#Asigne a una variable llamada puntaje el número 826 y agrege ; puntaje al final de la línea de código. Explique qué efecto tuvo agregar ;puntaje.
+```{r}
+puntaje <- 826; puntaje
+
+# El punto y coma ; se utiliza para separar comandos en la misma línea de código. Por lo tanto, puntaje al final de la línea muestra el valor de la variable puntaje después de que se le ha asignado el valor 826. El punto y coma permite incluir múltiples expresiones en una sola línea.
+```
+
+#Genere una secuencia de números del 12 al 82 utilizando la función seq ¿se utilizó print o; para imprimir la secuencia? ¿por qué?
+```{r}
+secuencia <- seq(12, 82)
+print(secuencia)
+
+#En este caso, se utiliza la función print para imprimir la secuencia. La función print es explícitamente diseñada para mostrar el valor de un objeto en la consola. El punto y coma ; no se utiliza para imprimir el valor, el punto y coma simplemente separa múltiples comandos en una sola línea.
+
+```
+
+# Guarde en una variable llamada v_1 una secuencia de números del 113 al 245. Imprima.
+```{r}
+v_1 <- seq(113, 245)
+print(v_1)
+```
+
+#Guarde en una variable llamada v_2 una secuencia de números del 113 al 245 sin utilizar la función seq. Imprima. ¿Encuentra alguna diferencia con v_1?
+```{r}
+v_2 <- 113:245
+print(v_2)
+
+#v_1 se crea usando la función seq(113, 245), que permite especificar intervalos personalizados y más opciones de secuencias.
+#v_2 se crea utilizando el operador :, que es una forma más directa de generar secuencias de números consecutivos.
+
+```
+
+#Modifique la variable v_1 de modo que solo contenga la secuencia de números de 3 en 3.Asigne esta secuencia a la variable v_3. Imprima.
+```{r}
+v_3 <- seq(113, 245, by = 3)
+print(v_3)
+```
+
+#Intente desarrollar el ejercicio anterior utilizando el código 113:245, by=3 ¿Funciona?
+```{r}
+113:245, by=3
+
+# No, el operador : en R solo genera secuencias con un incremento de 1 y no acepta el argumento by.
+```
+
+#Genere un vector con números del 113 al 128 y guárdelo en una variable llamada vector_1. Utilice la función matrix. Imprima. ¿Cúal es la diferencia con v_1?
+```{r}
+vector_1 <- 113:128
+matrix_1 <- matrix(vector_1)
+print(matrix_1)
+
+#v_1 es un vector de números del 113 al 245 con un incremento de 1.
+#matrix_1 es una matriz creada a partir de un vector que contiene los números del 113 al 128. La matriz tiene una única columna y múltiples filas (una fila para cada elemento del vector).
+```
+
+#Genere una matriz de cuatro filas y cuatro columnas con números del 113 al 128 y guárdela en una variable llamada matriz_1.
+```{r}
+matriz_1 <- matrix(113:128, nrow = 4, ncol = 4)
+print(matriz_1)
+
+```
+
+#Genere una variable llamda t con una secuencia de números del 0 al 20. Genere un vector con la función t^3 y asígnele una variable llamada vector_2. Imprima 
+```{r}
+# Crear una secuencia de números del 0 al 20
+t <- 0:20
+
+# Calcular el cubo de cada elemento en la secuencia
+vector_2 <- t^3
+
+# Imprimir el vector resultante
+print(vector_2)
+
+```
+
+#Haga una gráfica de puntos de la variable t
+```{r}
+# Crear una secuencia de números del 0 al 20
+t <- 0:20
+
+# Crear una gráfica de puntos de la variable t
+plot(t, main = "Gráfica de Puntos de la Variable t", xlab = "Índice", ylab = "Valor de t", pch = 19)
+grid()
+```
+
+#Haga una gráfica de línea del vector_2
+```{r}
+# Crear una secuencia de números del 0 al 20
+t <- 0:20
+
+# Calcular el cubo de cada elemento en la secuencia
+vector_2 <- t^3
+
+# Crear una gráfica de línea del vector_2
+plot(t, vector_2, type = "l", main = "Gráfica de Línea de vector_2", xlab = "Índice", ylab = "Valor de vector_2")
+grid()
+```
+
+#Modifique la matriz_1 cambiando la posición [3,2] de la matriz por un 118. Imprima nuevamente la matriz_1
+```{r}
+matriz_1[3, 2] <- 118
+print(matriz_1)
+
+```
+
+#Haga un gráfico de puntos de la columna 2 de la matriz_1
+```{r}
+# Extraer la columna 2 de la matriz_1
+columna_2 <- matriz_1[, 2]
+
+# Crear una gráfica de puntos de la columna 2
+plot(columna_2, main = "Gráfica de Puntos de la Columna 2 de matriz_1", xlab = "Índice", ylab = "Valor de la Columna 2", pch = 19)
+grid()
+
+```
+
+#Procesamiento de datos: procesamiento de datos con tidyverse
+```{r}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+```{r}
+install.packages("readr")
+```
+
+```{r}
+library(readr)
+```
+
+```{r}
+install.packages("tidyr")
+```
+```{r}
+library(tidyr)
+```
+
+```{r}
+install.packages("dplyr")
+```
+```{r}
+library(dplyr)
+```
+
+```{r}
+install.packages("ggplot2")
+```
+```{r}
+library(ggplot2)
+```
+
+#Cargar el conjunto de datos denominado airquality
+```{r}
+data("airquality")
+head(airquality)
+```
+
+#Seleccione las primeras tres colimnas de los datos airquality a partir de la función select e imprima solo los diez primeros registros con la funcion filter. 
+```{r}
+# Seleccionar las primeras tres columnas
+selected_data <- airquality %>% select(1:3)
+
+# Imprimir los primeros diez registros
+filtered_data <- selected_data %>% filter(row_number() <= 10)
+
+# Imprimir los resultados
+print(filtered_data)
+
+```
+
