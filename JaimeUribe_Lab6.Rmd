@@ -1,0 +1,152 @@
+---
+title: "Semana6"
+author: "Jaime Uribe, Juan Pablo Duque, Soranyi Toncel, Valentina Zapata"
+output: html_document
+date: "2024-08-29"
+---
+
+```{r}
+# Datos proporcionados
+datos <- c(500, 520, 510, 530, 550,
+           540, 560, 520, 500, 580,
+           590, 600, 610, 620, 630,
+           640, 650, 620, 630, 640,
+           620, 610, 600, 590, 580,
+           570, 550, 540, 530, 520)
+
+tiempo_ordenado=sort(datos)
+frecuencia_acumulada=cumsum(table(factor(tiempo_ordenado,levels=unique(tiempo_ordenado))))
+cantidad_observaciones=length(datos)
+
+# Función de distribución acumulada (FDA)
+fda <- frecuencia_acumulada/cantidad_observaciones
+print(fda)
+
+
+# Mostrar la FDA
+plot(fda, main="Función de Distribución Acumulada",
+     xlab="Horas", ylab="FDA", verticals=TRUE, do.points=FALSE)
+print(fda)
+
+# Calcular el valor esperado (media)
+valor_esperado <- mean(datos)
+valor_esperado
+
+# Calcular la varianza
+varianza <- var(datos)
+varianza
+
+
+```
+$$F(t)=\int_0^t\lambda e^{-\lambda x} dx$$
+```{r}
+# Tasa promedio
+lambda <- 0.5
+
+# Función de distribución acumulada (FDA)
+F <- function(x) {
+  1 - exp(-lambda * x)
+  
+}
+
+# Valores de x para graficar
+x_values <- seq(0, 10, by=0.1)
+
+# Calcular los valores de la FDA para cada x
+fda_values <- F(x_values)
+
+# Graficar la FDA
+plot(x_values, fda_values, type="l", col="blue",
+     main="Función de Distribución Acumulada (FDA)",
+     xlab="x", ylab="F(x)",
+     lwd=2)
+
+# Añadir líneas horizontales y verticales para ayudar a la interpretación
+abline(h=1, col="red", lty=2)
+abline(h=0, col="red", lty=2)
+
+```
+
+```{r}
+# Crear una secuencia de valores de tamaño de paso 1 en el intervalo [0, 60]
+valores <- seq(0, 60, by = 1)
+
+# Generar un conjunto de datos de ejemplo dentro del intervalo [0, 60]
+# Para este ejemplo, generamos 100 valores aleatorios entre 0 y 60
+set.seed(123)  # Para reproducibilidad
+datos <- sample(0:60, 100, replace = TRUE)
+
+# Calcular la función de distribución acumulada empírica (FDA)
+fda_empirica <- ecdf(datos)
+
+# Aplicar la FDA a los valores en la secuencia [0, 60]
+fda_values <- fda_empirica(valores)
+
+# Calcular los cuartiles del conjunto de datos
+cuartiles <- quantile(datos, probs = c(0.25, 0.5, 0.75))
+
+# Mostrar los resultados
+cat("Cuartiles del conjunto de datos:\n")
+print(cuartiles)
+
+cat("\nValores de la FDA para cada valor en la secuencia [0, 60]:\n")
+for (i in seq_along(valores)) {
+  cat("x =", valores[i], ", FDA =", fda_values[i], "\n")
+}
+
+# Graficar la FDA empírica
+plot(valores, fda_values, type = "l", col = "blue",
+     main = "Función de Distribución Acumulada Empírica (FDA)",
+     xlab = "Valores", ylab = "FDA")
+
+# Añadir líneas verticales en los cuartiles
+abline(v = cuartiles, col = "red", lty = 2)
+
+# Añadir texto para indicar los cuartiles en la gráfica
+text(cuartiles, fda_empirica(cuartiles), labels = c("Q1", "Q2", "Q3"), pos = 4, col = "red")
+
+
+```
+```{r}
+# Número de simulaciones
+n_sim <- 10000
+
+# Parámetros para la Fuente X
+prob_falla_x <- 0.2
+costo_adicional_x <- 1000
+costo_esperado_x <- 20000
+
+# Parámetros para la Fuente Y
+prob_falla_y <- 0.1
+costo_adicional_y <- 1500
+costo_esperado_y <- 25000
+
+# Parámetros para la Fuente Z
+prob_falla_z <- 0.15
+costo_adicional_z <- 1200
+costo_esperado_z <- 22000
+
+# Simulación para la Fuente X
+set.seed(123)  # Para reproducibilidad
+fallas_x <- rbinom(n_sim, 1, prob_falla_x)
+costo_total_x <- costo_esperado_x + fallas_x * costo_adicional_x
+valor_esperado_x <- mean(costo_total_x)
+
+# Simulación para la Fuente Y
+fallas_y <- rbinom(n_sim, 1, prob_falla_y)
+costo_total_y <- costo_esperado_y + fallas_y * costo_adicional_y
+valor_esperado_y <- mean(costo_total_y)
+
+# Simulación para la Fuente Z
+fallas_z <- rbinom(n_sim, 1, prob_falla_z)
+costo_total_z <- costo_esperado_z + fallas_z * costo_adicional_z
+valor_esperado_z <- mean(costo_total_z)
+
+
+# Mostrar resultados
+cat("Valor esperado del costo total para la Fuente X:", valor_esperado_x, "\n")
+cat("Valor esperado del costo total para la Fuente Y:", valor_esperado_y, "\n")
+cat("Valor esperado del costo total para la Fuente Z:", valor_esperado_z, "\n")
+
+```
+
